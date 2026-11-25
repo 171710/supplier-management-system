@@ -1,0 +1,77 @@
+
+<template>
+    <lightning-card
+        title="Supplier Management"
+        icon-name="standard:account">
+
+        <div class="slds-p-around_medium">
+
+            <!-- Search and filters -->
+            <div class="slds-grid slds-wrap slds-gutters slds-m-bottom_medium">
+
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12">
+                    <lightning-input
+                        type="search"
+                        label="Pesquisar fornecedor"
+                        placeholder="Nome do fornecedor ou conta..."
+                        value={searchTerm}
+                        onchange={handleSearch}>
+                    </lightning-input>
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_4-of-12">
+                    <lightning-combobox
+                        label="Estado de pagamento"
+                        value={selectedStatus}
+                        options={statusOptions}
+                        onchange={handleStatusChange}>
+                    </lightning-combobox>
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-12 slds-align-bottom">
+                    <lightning-button
+                        label="Actualizar"
+                        icon-name="utility:refresh"
+                        onclick={handleRefresh}
+                        disabled={isLoading}>
+                    </lightning-button>
+                </div>
+
+            </div>
+
+            <!-- Loading -->
+            <template lwc:if={isLoading}>
+                <lightning-spinner
+                    alternative-text="A carregar fornecedores"
+                    size="medium">
+                </lightning-spinner>
+            </template>
+
+            <!-- Error -->
+            <template lwc:if={errorMessage}>
+                <div class="slds-text-color_error slds-p-around_medium">
+                    {errorMessage}
+                </div>
+            </template>
+
+            <!-- Supplier table -->
+            <template lwc:if={hasSuppliers}>
+                <lightning-datatable
+                    key-field="Id"
+                    data={suppliers}
+                    columns={columns}
+                    hide-checkbox-column>
+                </lightning-datatable>
+            </template>
+
+            <!-- Empty state -->
+            <template lwc:if={isEmpty}>
+                <div class="slds-align_absolute-center slds-p-around_large">
+                    Não foram encontrados fornecedores.
+                </div>
+            </template>
+
+        </div>
+    </lightning-card>
+</template>
+

@@ -1,58 +1,133 @@
-# Salesforce DX Project
+# Supplier Management System
 
-Salesforce DX is a development approach that brings source-driven development, team collaboration, and continuous integration to the Salesforce Platform. Instead of working directly in an org through a web browser, you work with metadata as source files in a local DX project, track changes in version control, and deploy through automated processes.
+<p align="center">
+  A Salesforce CRM application for supplier management, account relationships, and payment status tracking.
+</p>
 
-This project template gets you started with the tools and structure you need to build Salesforce applications using source control, scratch orgs, and the Salesforce CLI.
+## Overview
 
-## Prerequisites
+The Supplier Management System is a Salesforce portfolio project developed to demonstrate practical skills in Salesforce administration and application development.
 
-Before you start, make sure you have:
+The application provides a centralized interface for managing supplier records, associating suppliers with business accounts, and monitoring payment statuses.
 
-- **Salesforce CLI** - Download from [developer.salesforce.com/tools/salesforcecli](https://developer.salesforce.com/tools/salesforcecli). See [Install Salesforce CLI](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_install_cli.htm) for details.
-- **VS Code with Salesforce Extension Pack** - See [Installation Instructions](https://developer.salesforce.com/docs/platform/sfvscode-extensions/guide/install.html) for details. Includes the Agentforce Vibes extension.
-- **A development org** - Sign up for a free Developer Edition org [here](https://developer.salesforce.com/signup).
-- **Dev Hub enabled** (optional, required to create scratch orgs) - You can enable Dev Hub in your development org under Setup > Dev Hub.  See [Provide Developers Access to Salesforce DX Tools](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_setup_dx_tools.htm).
+It combines Salesforce data management with a custom Lightning Web Component interface, Apex server-side logic, and SOQL queries.
+
+## Key Features
+
+- Supplier record management.
+- Supplier and Account relationship management.
+- Payment status tracking: Pending, Paid, and Overdue.
+- Custom Lightning Web Component interface.
+- Supplier search by name or associated account.
+- Payment status filtering.
+- Manual data refresh.
+- Apex controller for supplier data retrieval.
+- Apex unit testing.
+- Supplier reports and dashboard configured in the Salesforce development org.
+
+## Application Architecture
+
+The application follows a simple Salesforce development architecture:
+
+| Layer | Responsibility |
+|---|---|
+| Salesforce Data Model | Stores supplier and account information |
+| Apex Controller | Retrieves supplier records using SOQL |
+| Lightning Web Component | Displays supplier information |
+| JavaScript | Implements search, filtering, and refresh logic |
+| Apex Test Class | Validates controller functionality |
+
+## Technologies
+
+- Salesforce Platform
+- Apex
+- SOQL
+- Lightning Web Components (LWC)
+- JavaScript
+- HTML
+- Salesforce CLI
+- Visual Studio Code
+- Git and GitHub
 
 ## Project Structure
 
-Your DX project follows this structure:
+```text
+supplier-management-system/
+├── config/
+├── force-app/
+│   └── main/
+│       └── default/
+│           ├── classes/
+│           │   ├── SupplierController.cls
+│           │   └── SupplierControllerTest.cls
+│           └── lwc/
+│               └── supplierList/
+│                   ├── supplierList.html
+│                   ├── supplierList.js
+│                   ├── supplierList.js-meta.xml
+│                   └── __tests__/
+├── scripts/
+├── package.json
+├── sfdx-project.json
+└── README.md
+```
 
-- **`force-app/main/default/`** - Your metadata source files live in this default package directory. You can configure additional package directories in the `sfdx-project.json` file.
-- **`config/`** - Scratch org definitions and project settings
-- **`scripts/`** - Automation scripts for common tasks
-- **`sfdx-project.json`** - Project manifest that defines package directories, namespace, API version, and other project-level settings
+## Testing
 
-See [Salesforce DX Project Configuration](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_ws_config.htm).
+The `SupplierControllerTest` Apex test class validates:
 
-## Get Started
+- Supplier record retrieval.
+- Associated Account information.
+- Payment status values.
 
-Ready to start developing? The [Get Started with Salesforce DX](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_get_started_dx.htm) guide walks you through your first project, from creating a scratch org to creating a simple Apex class or LWC to deploying your code to a sandbox.
+The test was successfully executed in a Salesforce Developer Edition org:
 
-## Common Salesforce CLI Commands
+- Tests executed: 1
+- Tests passed: 1
+- Tests failed: 0
 
-Here are common CLI commands that you'll use the most:
+## Installation and Deployment
 
-- `sf org login web`: Authorize an org
-- `sf org open`: Open your org in a browser
-- `sf org create scratch`: Create a scratch org
-- `sf project deploy start`: Deploy metadata to your org
-- `sf project retrieve start`: Retrieve metadata from your org
-- `sf template generate <artifact>`: Scaffold new components, such as Apex classes and triggers, LWC components, Lightning apps, and more
-- `sf apex <command>`: Run Apex tests, run anonymous Apex blocks, and view logs
-- `sf data <command>`: Work with test data
-- `sf alias <command>`: Manage org aliases
-- `sf config <command>`: Configure CLI settings
+### Prerequisites
 
-## Use Agentforce Vibes to Build Lightning Apps
+- Salesforce Developer Edition org.
+- Salesforce CLI.
+- Visual Studio Code.
+- Salesforce Extension Pack.
 
-Transform your ideas into custom Lightning apps that extend CRM workflows directly in Lightning Experience. Through natural conversations with Agentforce Vibes, implement custom objects and fields, complex business logic, and dynamic UI components. See [Build a Lightning App Using Agentforce Vibes](https://developer.salesforce.com/docs/platform/einstein-for-devs/guide/lexapp-overview.html).
+### Clone the Repository
 
-## Additional Resources
+```bash
+git clone https://github.com/171710/supplier-management-system.git
+cd supplier-management-system
+```
 
-- [Agentforce Vibes Developer Guide](https://developer.salesforce.com/docs/platform/einstein-for-devs/guide/einstein-overview.html)
-- [Salesforce CLI Installation Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_intro.htm)
-- [Salesforce DX Developer Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/)
-- [Salesforce CLI Command Reference](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/)
-- [Salesforce CLI Plugin Development Guide](https://developer.salesforce.com/docs/platform/salesforce-cli-plugin/guide/conceptual-overview.html)
-- [Salesforce VS Code Extensions Documentation](https://developer.salesforce.com/tools/vscode/)
+### Authenticate with Salesforce
 
+```bash
+sf org login web
+```
+
+### Deploy the Source Code
+
+```bash
+sf project deploy start
+```
+
+## Project Status
+
+**Development version — Portfolio Project**
+
+The repository currently contains the Apex controller, Apex test class, and Lightning Web Component source code.
+
+The custom Salesforce data model, automation, reports, and dashboard were also configured in the development org. Their metadata has not yet been fully retrieved into this repository.
+
+## Author
+
+**Marco Cassuba**
+
+Computer Science Student | Aspiring Salesforce Developer
+
+GitHub: [github.com/171710](https://github.com/171710)
+
+Project: [Supplier Management System](https://github.com/171710/supplier-management-system)

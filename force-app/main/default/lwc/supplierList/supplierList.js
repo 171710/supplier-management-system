@@ -1,6 +1,8 @@
 
 import { LightningElement } from 'lwc';
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import getSuppliers from '@salesforce/apex/SupplierController.getSuppliers';
+
 
 const COLUMNS = [
     { label: 'Fornecedor', fieldName: 'Name', type: 'text' },
@@ -14,6 +16,8 @@ const COLUMNS = [
 
 export default class SupplierList extends LightningElement {
     columns = COLUMNS;
+
+    showNewSupplierForm = false;
 
     allSuppliers = [];
     suppliers = [];
@@ -92,6 +96,37 @@ export default class SupplierList extends LightningElement {
 
     async handleRefresh() {
         await this.loadSuppliers();
+    }
+    handleNewSupplier() {
+        this.showNewSupplierForm = true;
+    }
+
+    handleCancelNewSupplier() {
+        this.showNewSupplierForm = false;
+    }
+
+    handleSupplierSuccess() {
+        this.showNewSupplierForm = false;
+
+        this.dispatchEvent(
+            new ShowToastEvent({
+                title: 'Sucesso',
+                message: 'Fornecedor criado com sucesso!',
+                variant: 'success'
+            })
+        );
+
+        this.loadSuppliers();
+    }
+
+    handleSupplierError(event) {
+        this.dispatchEvent(
+            new ShowToastEvent({
+                title: 'Erro ao criar fornecedor',
+                message: event.detail.message,
+                variant: 'error'
+            })
+        );
     }
 
     get hasSuppliers() {

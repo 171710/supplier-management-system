@@ -1,12 +1,65 @@
 
+
 <template>
     <lightning-card
         title="Supplier Management"
         icon-name="standard:account">
 
+        <!-- Botão para abrir o formulário -->
         <div class="slds-p-around_medium">
+            <div class="slds-m-bottom_medium">
+                <lightning-button
+                    label="Novo Fornecedor"
+                    icon-name="utility:add"
+                    variant="brand"
+                    onclick={handleNewSupplier}>
+                </lightning-button>
+            </div>
 
-            <!-- Search and filters -->
+            <!-- Formulário de criação -->
+            <template lwc:if={showNewSupplierForm}>
+                <div class="slds-p-around_medium slds-border_bottom">
+                    <h2 class="slds-text-heading_medium slds-m-bottom_medium">
+                        Novo Fornecedor
+                    </h2>
+
+                    <lightning-record-edit-form
+                        object-api-name="SuppLier__c"
+                        onsuccess={handleSupplierSuccess}
+                        onerror={handleSupplierError}>
+
+                        <lightning-messages></lightning-messages>
+
+                        <lightning-input-field
+                            field-name="Name">
+                        </lightning-input-field>
+
+                        <lightning-input-field
+                            field-name="Account__c">
+                        </lightning-input-field>
+
+                        <lightning-input-field
+                            field-name="Payment_Status__c">
+                        </lightning-input-field>
+
+                        <div class="slds-m-top_medium">
+                            <lightning-button
+                                type="submit"
+                                label="Guardar Fornecedor"
+                                variant="brand">
+                            </lightning-button>
+
+                            <lightning-button
+                                label="Cancelar"
+                                onclick={handleCancelNewSupplier}
+                                class="slds-m-left_small">
+                            </lightning-button>
+                        </div>
+                    </lightning-record-edit-form>
+                </div>
+            </template>
+
+            <!-- Pesquisa e filtros -->
             <div class="slds-grid slds-wrap slds-gutters slds-m-bottom_medium">
 
                 <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12">
@@ -36,10 +89,9 @@
                         disabled={isLoading}>
                     </lightning-button>
                 </div>
-
             </div>
 
-            <!-- Loading -->
+            <!-- Carregamento -->
             <template lwc:if={isLoading}>
                 <lightning-spinner
                     alternative-text="A carregar fornecedores"
@@ -47,14 +99,14 @@
                 </lightning-spinner>
             </template>
 
-            <!-- Error -->
+            <!-- Erro -->
             <template lwc:if={errorMessage}>
                 <div class="slds-text-color_error slds-p-around_medium">
                     {errorMessage}
                 </div>
             </template>
 
-            <!-- Supplier table -->
+            <!-- Tabela -->
             <template lwc:if={hasSuppliers}>
                 <lightning-datatable
                     key-field="Id"
@@ -64,7 +116,7 @@
                 </lightning-datatable>
             </template>
 
-            <!-- Empty state -->
+            <!-- Lista vazia -->
             <template lwc:if={isEmpty}>
                 <div class="slds-align_absolute-center slds-p-around_large">
                     Não foram encontrados fornecedores.
@@ -74,4 +126,3 @@
         </div>
     </lightning-card>
 </template>
-

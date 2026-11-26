@@ -1,40 +1,45 @@
 # Supplier Management System
 
 <p align="center">
-  A Salesforce CRM application for supplier management, account relationships, and payment status tracking.
+  A Salesforce CRM application for managing suppliers, business accounts, and payment statuses.
+</p>
+
+<p align="center">
+  **Portfolio Project | Salesforce Development**
 </p>
 
 ## Overview
 
-The Supplier Management System is a Salesforce portfolio project developed to demonstrate practical skills in Salesforce administration and application development.
+The **Supplier Management System** is a Salesforce portfolio project designed to demonstrate practical skills in Salesforce application development.
 
-The application provides a centralized interface for managing supplier records, associating suppliers with business accounts, and monitoring payment statuses.
+It provides a centralized interface for managing supplier records, associating suppliers with business accounts, and tracking payment statuses.
 
-It combines Salesforce data management with a custom Lightning Web Component interface, Apex server-side logic, and SOQL queries.
+The application combines Salesforce data management, Apex server-side logic, SOQL queries, and a custom Lightning Web Component (LWC) interface.
 
 ## Key Features
 
-- Supplier record management.
+- Supplier record creation and management.
 - Supplier and Account relationship management.
 - Payment status tracking: Pending, Paid, and Overdue.
 - Custom Lightning Web Component interface.
-- Supplier search by name or associated account.
+- Supplier search by supplier name or associated account.
 - Payment status filtering.
 - Manual data refresh.
+- Success and error notifications.
 - Apex controller for supplier data retrieval.
-- Apex unit testing.
-- Supplier reports and dashboard configured in the Salesforce development org.
+- Apex unit tests.
 
 ## Application Architecture
 
-The application follows a simple Salesforce development architecture:
+The application follows a layered Salesforce development architecture:
 
 | Layer | Responsibility |
 |---|---|
 | Salesforce Data Model | Stores supplier and account information |
 | Apex Controller | Retrieves supplier records using SOQL |
-| Lightning Web Component | Displays supplier information |
-| JavaScript | Implements search, filtering, and refresh logic |
+| Lightning Web Component | Provides the user interface |
+| JavaScript | Handles search, filtering, refresh, and component interactions |
+| HTML | Defines the component structure and supplier form |
 | Apex Test Class | Validates controller functionality |
 
 ## Technologies
@@ -79,12 +84,16 @@ The `SupplierControllerTest` Apex test class validates:
 - Supplier record retrieval.
 - Associated Account information.
 - Payment status values.
+- Empty result handling when no supplier records are available.
 
-The test was successfully executed in a Salesforce Developer Edition org:
+Latest test execution in a Salesforce Developer Edition org:
 
-- Tests executed: 1
-- Tests passed: 1
-- Tests failed: 0
+| Result | Count |
+|---|---:|
+| Tests executed | 2 |
+| Tests passed | 2 |
+| Tests failed | 0 |
+| Pass rate | 100% |
 
 ## Installation and Deployment
 
@@ -111,16 +120,22 @@ sf org login web
 ### Deploy the Source Code
 
 ```bash
-sf project deploy start
+sf project deploy start --target-org <org-alias>
 ```
+
+Replace `<org-alias>` with the alias of your authenticated Salesforce organization.
+
+**Note:** The repository contains the Apex classes and Lightning Web Component source code. The custom Salesforce data model, reports, dashboard, and other org-level configurations may require additional setup because their metadata has not yet been fully retrieved into this repository.
 
 ## Project Status
 
-**Development version — Portfolio Project**
+**Development Version — Portfolio Project**
 
-The repository currently contains the Apex controller, Apex test class, and Lightning Web Component source code.
+The application has been implemented and tested in a Salesforce Developer Edition environment.
 
-The custom Salesforce data model, automation, reports, and dashboard were also configured in the development org. Their metadata has not yet been fully retrieved into this repository.
+The repository includes the Apex controller, Apex unit tests, and Lightning Web Component source code.
+
+Further improvements may include expanded test coverage, additional security validation, and retrieval of the remaining Salesforce metadata.
 
 ## Author
 
@@ -128,6 +143,5 @@ The custom Salesforce data model, automation, reports, and dashboard were also c
 
 Computer Science Student | Aspiring Salesforce Developer
 
-GitHub: [github.com/171710](https://github.com/171710)
-
-Project: [Supplier Management System](https://github.com/171710/supplier-management-system)
+- GitHub: https://github.com/171710
+- Project Repository: https://github.com/171710/supplier-management-system
